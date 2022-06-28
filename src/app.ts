@@ -26,7 +26,7 @@ const sendTx = async (receiverAddress: string, res: Response) => {
     const path = stringToPath(hdPath);
     let privateKey: Uint8Array;
     if (KeyUtils.isPrivateKey(mnemonic)) {
-        privateKey = Buffer.from(mnemonic.trim(), "hex");
+        privateKey = Buffer.from(mnemonic.trim().replace("0x", ""), "hex");
     } else {
         privateKey = await KeyUtils.getPrivateKeyFromMnemonic(mnemonic, path);
     }
